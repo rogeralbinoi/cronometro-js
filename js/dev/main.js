@@ -1,9 +1,10 @@
 class Cronometro {
-    constructor ($el,$input) {
-        this.$el = $el;
+    constructor (obj) {
+        this.$el = obj.el ? obj.el : undefined;
+        this.$input = obj.input ? obj.input : false;
+
         this.min = 0;
         this.sec = 0;
-        this.$input = $input;
 
         var duration = 1000,
             end = +new Date() + duration;
@@ -35,8 +36,12 @@ class Cronometro {
     render() {
         var min = String(this.min).length > 1 ? this.min : '0'+this.min;
         var sec = String(this.sec).length > 1 ? this.sec : '0'+this.sec;
-        this.$el.html(min+':'+sec);
-        this.$input.val(min+':'+sec);
+        if (this.$el) {
+            this.$el.html(min+':'+sec);
+        }
+        if (this.$input) {
+            this.$input.val(min+':'+sec);
+        }
     }
 }
 window.Cronometro = Cronometro;
