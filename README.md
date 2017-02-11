@@ -2,6 +2,8 @@
 
 Este é um simples cronômetro para contagem de quantos minutos o usuário ficou na página.
 
+[Exemplo](https://rogeralbinoi.github.io/cronometro-js/)
+
 Inclua alguma versão do [jQuery](https://jquery.com/) e o arquivo [js/dist/main.js](https://rogeralbinoi.github.io/cronometro-js/js/dist/main.js) em seu projeto.
 
 **Como usar?**
@@ -16,5 +18,3 @@ Tanto o ```el``` quanto o ```input``` são opcionais.
     });
 </script>
 ```
-
-[Exemplo](https://rogeralbinoi.github.io/cronometro-js/)
