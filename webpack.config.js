@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 module.exports = {
   entry: `${__dirname}/js/dev/main.js`,
   output: {
