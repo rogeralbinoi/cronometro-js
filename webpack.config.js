@@ -1,9 +1,9 @@
 const webpack = require('webpack');
 module.exports = {
-  entry: `${__dirname}/js/dev/main.js`,
+  entry: `${__dirname}/js/dev/cronometro.js`,
   output: {
       path: `${__dirname}`,
-      filename: "js/dist/main.js"
+      filename: "js/dist/cronometro.js"
   },
   module: {
     loaders: [
