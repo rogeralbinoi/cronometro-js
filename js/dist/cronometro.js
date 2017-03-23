@@ -72,7 +72,7 @@
 	        value: function getFormatedHours(seconds) {
 	            var secondsPerMinutes = 60;
 	            var secondsPerHours = 3600;
-	            var hours, minutes, seconds;
+	            var hours, minutes;
 	            hours = Cronometro.getHoursFromSeconds(seconds);
 	            seconds -= hours * secondsPerHours;
 	            minutes = Cronometro.getMinutesFromSeconds(seconds);
@@ -144,8 +144,7 @@
 	        value: function render() {
 	            var _this2 = this;
 
-	            var that = this,
-	                formatedHours = Cronometro.getFormatedHours(this.seconds),
+	            var formatedHours = Cronometro.getFormatedHours(this.seconds),
 	                hours = Cronometro.getFormatedTime(formatedHours.hours),
 	                minutes = Cronometro.getFormatedTime(formatedHours.minutes),
 	                seconds = Cronometro.getFormatedTime(formatedHours.seconds);

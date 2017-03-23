@@ -10,7 +10,7 @@ class Cronometro {
     static getFormatedHours(seconds) {
         const secondsPerMinutes = 60
         const secondsPerHours = 3600
-        var hours,minutes,seconds
+        var hours,minutes
         hours = Cronometro.getHoursFromSeconds(seconds)
         seconds -= hours*secondsPerHours;
         minutes = Cronometro.getMinutesFromSeconds(seconds)
@@ -64,8 +64,7 @@ class Cronometro {
         return String(time).length > 1 ? time : '0'+time
     }
     render() {
-        var that = this,
-            formatedHours = Cronometro.getFormatedHours(this.seconds),
+        var formatedHours = Cronometro.getFormatedHours(this.seconds),
             hours = Cronometro.getFormatedTime(formatedHours.hours),
             minutes = Cronometro.getFormatedTime(formatedHours.minutes),
             seconds = Cronometro.getFormatedTime(formatedHours.seconds)
