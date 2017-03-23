@@ -3,28 +3,29 @@
     <head>
         <meta charset="UTF-8">
         <title>Cronômetro</title>
-        <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container">
             <h1>cronometro-js</h1>
             <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <div>
                     <div class="pure-g">
                         <div class="pure-u-1">
-                            <strong>Format: hh:mm:ss</strong> <br>
+                            <strong>Format: hh:mm:ss</strong> <br><br>
                             <strong class="cron">00:00:00</strong>
                         </div>
-                        <form class="pure-form pure-u-1" action="">
-                            <input type="text" id="input-cron">
+                        <form action="">
+                            <br>
+                            <input type="text" id="input-cron" value="00:00:00">
                         </form>
                     </div>
                 </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
-                    <button class="pure-button pure-button-primary" type="button" onClick="cron.play()" >play()</button>
-                    <button class="pure-button pure-button-primary" type="button" onClick="cron.pause()">pause()</button>
-                    <button class="pure-button pure-button-primary" type="button" onClick="cron.stop()">stop()</button>
+                <div>
+                    <button type="button" onClick="cron.play()" >play()</button>
+                    <button type="button" onClick="cron.pause()">pause()</button>
+                    <button type="button" onClick="cron.stop()">stop()</button>
+                    <button type="button" onClick="cron.reset_and_play()">reset_and_play()</button>
                 </div>
             </div>
         </div>
@@ -32,10 +33,11 @@
         <script src="js/dist/cronometro.js"></script>
         <script>
             var cron = new Cronometro({
-                el: $('.cron'),
-                input: $('#input-cron')
+                // el and input: querySelector or querySelectorAll or getElementById
+                el: document.querySelectorAll('.cron'),
+                input: document.getElementById('input-cron'),
+                autoplay: true
             });
-            cron.play()
         </script>
     </body>
 </html>

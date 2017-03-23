@@ -46,6 +46,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -88,7 +92,11 @@
 	        this.$input = obj.input ? obj.input : false;
 	        this.running = false;
 	        this.seconds = 0;
-	        this.render();
+	        if (obj.autoplay) {
+	            this.play();
+	        } else {
+	            this.render();
+	        }
 	    }
 
 	    _createClass(Cronometro, [{
@@ -120,6 +128,12 @@
 	            }
 	        }
 	    }, {
+	        key: 'reset_and_play',
+	        value: function reset_and_play() {
+	            this.stop();
+	            this.play();
+	        }
+	    }, {
 	        key: 'nextSec',
 	        value: function nextSec() {
 	            this.seconds += 1;
@@ -128,15 +142,92 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var formatedHours = Cronometro.getFormatedHours(this.seconds);
-	            var hours = Cronometro.getFormatedTime(formatedHours.hours);
-	            var minutes = Cronometro.getFormatedTime(formatedHours.minutes);
-	            var seconds = Cronometro.getFormatedTime(formatedHours.seconds);
-	            if (this.$el) {
-	                this.$el.html(hours + ':' + minutes + ':' + seconds);
+	            var _this2 = this;
+
+	            var that = this,
+	                formatedHours = Cronometro.getFormatedHours(this.seconds),
+	                hours = Cronometro.getFormatedTime(formatedHours.hours),
+	                minutes = Cronometro.getFormatedTime(formatedHours.minutes),
+	                seconds = Cronometro.getFormatedTime(formatedHours.seconds);
+
+	            function if_input_then(element, callback) {
+	                if (element === 'INPUT') {
+	                    callback.yes();
+	                } else {
+	                    callback.no();
+	                }
 	            }
+
+	            if (this.$el) {
+	                var _iteratorNormalCompletion = true;
+	                var _didIteratorError = false;
+	                var _iteratorError = undefined;
+
+	                try {
+	                    for (var _iterator = this.$el[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                        var element = _step.value;
+
+	                        element.innerHTML = hours + ':' + minutes + ':' + seconds;
+	                    }
+	                } catch (err) {
+	                    _didIteratorError = true;
+	                    _iteratorError = err;
+	                } finally {
+	                    try {
+	                        if (!_iteratorNormalCompletion && _iterator.return) {
+	                            _iterator.return();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError) {
+	                            throw _iteratorError;
+	                        }
+	                    }
+	                }
+	            }
+
 	            if (this.$input) {
-	                this.$input.val(hours + ':' + minutes + ':' + seconds);
+	                var test_node_collection = function test_node_collection() {
+	                    var _iteratorNormalCompletion2 = true;
+	                    var _didIteratorError2 = false;
+	                    var _iteratorError2 = undefined;
+
+	                    try {
+	                        var _loop = function _loop() {
+	                            var element = _step2.value;
+
+	                            if_input_then(element.tagName, {
+	                                yes: function yes() {
+	                                    element.value = hours + ':' + minutes + ':' + seconds;
+	                                }
+	                            });
+	                        };
+
+	                        for (var _iterator2 = _this2.$input[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	                            _loop();
+	                        }
+	                    } catch (err) {
+	                        _didIteratorError2 = true;
+	                        _iteratorError2 = err;
+	                    } finally {
+	                        try {
+	                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	                                _iterator2.return();
+	                            }
+	                        } finally {
+	                            if (_didIteratorError2) {
+	                                throw _iteratorError2;
+	                            }
+	                        }
+	                    }
+	                };
+	                if_input_then(this.$input.tagName, {
+	                    yes: function yes() {
+	                        _this2.$input.value = hours + ':' + minutes + ':' + seconds;
+	                    },
+	                    no: function no() {
+	                        test_node_collection();
+	                    }
+	                });
 	            }
 	        }
 	    }], [{
@@ -150,6 +241,7 @@
 	}();
 
 	window.Cronometro = Cronometro;
+	exports.default = Cronometro;
 
 /***/ }
 /******/ ]);

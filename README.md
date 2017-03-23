@@ -1,20 +1,39 @@
 # cronometro-js
 
-Este é um simples cronômetro para contagem de quantos minutos o usuário ficou na página.
+Este cronômetro foi feito para fins de estudo.
+
+É um simples cronômetro.
 
 [Exemplo](https://rogeralbinoi.github.io/cronometro-js/)
 
-Inclua alguma versão do [jQuery](https://jquery.com/) e o arquivo [js/dist/main.js](https://rogeralbinoi.github.io/cronometro-js/js/dist/main.js) em seu projeto.
-
 **Como usar?**
 
-Tanto o ```el``` quanto o ```input``` são opcionais.
+Inclua o arquivo [js/dist/cronometro.js](https://rogeralbinoi.github.io/cronometro-js/js/dist/cronometro.js) em seu projeto.
+
+Nenhuma das options são obrigatórias.
 
 ```
 <script>
     var cron = new Cronometro({
-        el: $('.cron'),
-        input: $('#input-cron')
+        // el and input: querySelector or querySelectorAll or getElementById
+        el: document.querySelectorAll('.cron'),
+        input: document.getElementById('input-cron'),
+        autoplay: true
     });
+    // Métodos
+    // cron.play()
+    // cron.pause()
+    // cron.stop()
+    // cron.reset_and_play()
+</script>
+```
+
+**ES6**
+
+```
+<script>
+    // ES6
+    import Cronometro from './cronometro-js/dev/cronometro.js'
+    var cron = new Cronometro({/* options */});
 </script>
 ```

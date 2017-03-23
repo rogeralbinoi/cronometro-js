@@ -26,7 +26,11 @@ class Cronometro {
         this.$input = obj.input ? obj.input : false
         this.running = false;
         this.seconds = 0
-        this.render()
+        if(obj.autoplay) {
+            this.play()
+        }else {
+            this.render()
+        }
     }
     play() {
         if (this.running !== true) {
@@ -48,6 +52,10 @@ class Cronometro {
             this.running = false
         }
     }
+    reset_and_play() {
+        this.stop()
+        this.play()
+    }
     nextSec() {
         this.seconds += 1
         return;
@@ -56,17 +64,47 @@ class Cronometro {
         return String(time).length > 1 ? time : '0'+time
     }
     render() {
-        var formatedHours = Cronometro.getFormatedHours(this.seconds)
-        var hours = Cronometro.getFormatedTime(formatedHours.hours)
-        var minutes = Cronometro.getFormatedTime(formatedHours.minutes)
-        var seconds = Cronometro.getFormatedTime(formatedHours.seconds)
+        var that = this,
+            formatedHours = Cronometro.getFormatedHours(this.seconds),
+            hours = Cronometro.getFormatedTime(formatedHours.hours),
+            minutes = Cronometro.getFormatedTime(formatedHours.minutes),
+            seconds = Cronometro.getFormatedTime(formatedHours.seconds)
+
+        function if_input_then(element, callback) {
+            if(element === 'INPUT') {
+                callback.yes()
+            }else {
+                callback.no()
+            }
+        }
+
         if (this.$el) {
-            this.$el.html(`${hours}:${minutes}:${seconds}`)
+            for ( let element of this.$el) {
+                element.innerHTML = `${hours}:${minutes}:${seconds}`
+            }
         }
+
         if (this.$input) {
-            this.$input.val(`${hours}:${minutes}:${seconds}`)
+            let test_node_collection = () => {
+                for (let element of this.$input) {
+                    if_input_then(element.tagName, {
+                        yes: ()=> {
+                            element.value = `${hours}:${minutes}:${seconds}`
+                        }
+                    })
+                }
+            }
+            if_input_then(this.$input.tagName, {
+                yes: ()=> {
+                    this.$input.value = `${hours}:${minutes}:${seconds}`
+                },
+                no: ()=> {
+                    test_node_collection()
+                }
+            })
         }
+
     }
 }
 window.Cronometro = Cronometro
-exports default Cronometro
+export default Cronometro
