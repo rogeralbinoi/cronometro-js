@@ -37,3 +37,5 @@ Nenhuma das options são obrigatórias.
     var cron = new Cronometro({/* options */});
 </script>
 ```
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
